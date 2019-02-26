@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Milliseconds counter</title>
+
+    <style>
+        /* Set height of body and the document to 100% to enable "full page tabs" */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial;
+          }
+            
+          /* Style the tab content (and add height:100% for full page content) */
+          .tabcontent {
+            color: white;
+            padding-top: 25%;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            vertical-align: center;
+          }
+          
+          /*
+          #Home {background-color: rgb(27, 171, 27);}
+          */
+    </style>
+
+    <script>
+        // MILLISECONDS COUNTER
+        var secondsCounterElement;
+        var startTime = new Date();
+
+        window.addEventListener('load', start);
+
+        function start()
+        {
+            home = document.getElementById('Home');
+            setBackgroundColor();
+            secondsCounterElement = document.getElementById('secondsCounter');
+            window.requestAnimationFrame(mainLoop);
+
+        };
+
+        function mainLoop(){
+            let currentTime = new Date();
+            secondsCounterElement.innerHTML = currentTime - startTime;
+            window.requestAnimationFrame(mainLoop);
+        }
+
+        // URL PARAMETERS
+
+
+        var home = '';
+        let bgcolor = '';
+        
+        function setBackgroundColor(){
+        /* This URLSearchParams takes the query string as parameter */ 
+            const parameters = new URLSearchParams(window.location.search);
+
+            if (parameters.has('bgcolor')){
+                bgcolor = parameters.get('bgcolor');
+                home.style.backgroundColor = bgcolor;
+            }
+        }
+        
+    </script>
+</head>
+<body>
+    <div id="Home" class="tabcontent">
+        <h1 id="secondsCounter">milliseconds counter</h1>
+    </div>
+</body>
+</html>
